@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 
 public class HeroController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1;
+    [SerializeField] private bool castActivation;
+
+    public Action OnCastActivation;
   
     private void FixedUpdate()
     {
@@ -10,5 +14,16 @@ public class HeroController : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + moveSpeed / 1000);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CastActivation();
+        }
+    }
+
+
+    private void CastActivation()
+    {
+        OnCastActivation?.Invoke();
     }
 }
