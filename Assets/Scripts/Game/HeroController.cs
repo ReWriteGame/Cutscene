@@ -3,6 +3,7 @@ using UnityEngine;
 public class HeroController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1;
+  
     private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W))
