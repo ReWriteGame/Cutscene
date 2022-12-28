@@ -8,6 +8,7 @@ public class HeroController : MonoBehaviour
     [SerializeField] private float moveSpeed = 1;
 
     public Action OnCastActivation;
+    public Action OnCast;
     public Action<bool> OnWalk;
 
     private void Start()
@@ -17,12 +18,12 @@ public class HeroController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + moveSpeed / 1000);
             OnWalk?.Invoke(true);
         }
-        else
+        if (Input.GetKeyUp(KeyCode.W))
         {
             OnWalk?.Invoke(false);
         }
@@ -32,12 +33,20 @@ public class HeroController : MonoBehaviour
         {
             CastActivation();
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Cast();
+        }
     }
 
 
     private void CastActivation()
     {
         OnCastActivation?.Invoke();
+    }
+    private void Cast()
+    {
+        OnCast?.Invoke();
     }
 
 

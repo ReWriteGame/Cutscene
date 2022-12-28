@@ -12,18 +12,25 @@ public class HeroEffectsController : MonoBehaviour
     private void OnEnable()
     {
         hero.OnCastActivation += ActivateEffect;
+        hero.OnCast += CastEffect;
     }
 
     private void OnDisable()
     {
         hero.OnCastActivation -= ActivateEffect;
+        hero.OnCastActivation -= CastEffect;
     }
 
-    private void ActivateEffect()
+    private void CastEffect()
     {
         StartCoroutine(ReStartEffect(centerActivateEffect));
         StartCoroutine(ReStartEffect(leftHandActivateEffect, delayExploding));
         StartCoroutine(ReStartEffect(rightHandActivateEffect, delayExploding));
+    }
+
+    private void ActivateEffect()
+    {
+        
     }
 
     private IEnumerator ReStartEffect(GameObject effect, float delay = 0)
