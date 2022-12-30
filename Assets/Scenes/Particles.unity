@@ -70177,10 +70177,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero: {fileID: 0}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
-  handEffect: {fileID: 0}
-  delay: 0
+  centerActivateEffect: {fileID: 0}
+  leftHandActivateEffect: {fileID: 0}
+  rightHandActivateEffect: {fileID: 0}
+  delayExploding: 3
 --- !u!1001 &7659248444240782219
 PrefabInstance:
   m_ObjectHideFlags: 0
