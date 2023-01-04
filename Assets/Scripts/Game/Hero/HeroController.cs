@@ -2,25 +2,20 @@ using System;
 using UnityEngine;
 using System.Collections;
 
-
 public class HeroController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 1;
-
+    
     public Action OnCastActivation;
     public Action OnCast;
     public Action<bool> OnWalk;
 
-    private void Start()
-    {
-        StartCoroutine(CutsceneClip());
-    }
+  
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + moveSpeed / 1000);
+            //transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + moveSpeed / 1000);
             OnWalk?.Invoke(true);
         }
         if (Input.GetKeyUp(KeyCode.W))
@@ -37,8 +32,19 @@ public class HeroController : MonoBehaviour
         {
             Cast();
         }
+
+        
+
     }
 
+    private void FixedUpdate()
+    {
+        //Move(moveDirection);
+    }
+
+   
+
+    
 
     private void CastActivation()
     {
@@ -49,10 +55,4 @@ public class HeroController : MonoBehaviour
         OnCast?.Invoke();
     }
 
-
-    private IEnumerator CutsceneClip()
-    {
-
-        yield break;
-    }
 }
