@@ -14,7 +14,7 @@ namespace Tools.Animations
         [SerializeField][Min(0)] private float ñurveTime = 1;
         [SerializeField] private AnimationCurve rotationCurve = AnimationCurve.Constant(0, 1, 1);
         [Space]
-        [SerializeField] private bool playOnAwake;
+        [SerializeField] private bool playOnAwake = true;
         [SerializeField] private bool animated;
         
         private Transform transformObject;
