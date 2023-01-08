@@ -11,8 +11,8 @@ public class HeroEffectsController : MonoBehaviour
   
     private void OnEnable()
     {
-        hero.OnCastActivation += ActivateEffect;
-        hero.OnCast += CastEffect;
+        //hero.OnCastActivation += ActivateEffect;
+        //hero.OnCast += CastEffect;
     }
 
     private void OnDisable()
