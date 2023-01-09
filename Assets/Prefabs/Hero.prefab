@@ -117,22 +117,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e7081d65f07ba4794c5d63e893a17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputUserDirection: {x: 0, y: 0}
   move: {fileID: 1607610947}
   moveSpeed: 2
   sprintSpeed: 5
-  SpeedChangeRate: 10
+  rotationSmoothTime: 0.3
+  speedChangeRate: 10
   speedOffset: 0.1
   sprint: 0
   analogMovement: 1
-  inputUserDirection: {x: 0, y: 0}
-  camera: {fileID: 0}
-  RotationSmoothTime: 0.12
-  targetSpeed: 0
-  GroundedOffset: -0.14
-  GroundedRadius: 0.28
-  GroundLayers:
+  groundedOffset: -0.14
+  groundedRadius: 0.28
+  groundLayers:
     serializedVersion: 2
     m_Bits: 64
+  camera: {fileID: 0}
 --- !u!114 &7130650995064527070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc05907bd726e54ba25af34f102a1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 907857830089910324}
+  animator: {fileID: 907857830089910324}
   hero: {fileID: 5930817237687634353}
 --- !u!114 &101380940
 MonoBehaviour:
@@ -175,13 +174,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.8
+  m_Height: 1.7
   m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.25
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.87, z: 0}
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!114 &1607610947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,13 +970,13 @@ Cloth:
   m_GameObject: {fileID: 3743658992814225028}
   m_Enabled: 1
   m_StretchingStiffness: 1
-  m_BendingStiffness: 0
+  m_BendingStiffness: 0.1
   m_UseTethers: 1
   m_UseGravity: 1
-  m_Damping: 0
+  m_Damping: 0.3
   m_ExternalAcceleration: {x: 0, y: 0, z: 0}
   m_RandomAcceleration: {x: 0, y: 0, z: 0}
-  m_WorldVelocityScale: 0.5
+  m_WorldVelocityScale: 0
   m_WorldAccelerationScale: 1
   m_Friction: 0.5
   m_CollisionMassScale: 0
