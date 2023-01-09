@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ActionMagic1",
+                    "name": "ActionSpellActivate",
                     "type": "Button",
                     "id": "2ab8910f-bce2-4f46-b2d1-5f20f2ccca37",
                     "expectedControlType": "Button",
@@ -51,7 +51,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "ActionMagic2",
+                    "name": "ActionSpellPortal",
                     "type": "Button",
                     "id": "dcf31446-55dc-4565-83e8-44f815bd5fae",
                     "expectedControlType": "Button",
@@ -60,7 +60,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "ActionMagic3",
+                    "name": "ActionSpellLight",
                     "type": "Button",
                     "id": "e131b391-8141-40e8-adbd-e6014ce77889",
                     "expectedControlType": "Button",
@@ -209,7 +209,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "ActionMagic1",
+                    "action": "ActionSpellActivate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -220,7 +220,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "ActionMagic2",
+                    "action": "ActionSpellPortal",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -231,7 +231,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "ActionMagic3",
+                    "action": "ActionSpellLight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

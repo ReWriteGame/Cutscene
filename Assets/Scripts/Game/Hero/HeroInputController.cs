@@ -13,9 +13,18 @@ public class HeroInputController : MonoBehaviour
     private void Awake()
     {
         input = new UserInput();
+
         input.Hero.Jump.performed += Jump;
         input.Hero.Sprint.performed += Sprint;
         input.Hero.Look.performed += Look;
+        input.Hero.ActionSpellActivate.performed += SpellActivate;
+        input.Hero.ActionSpellPortal.performed += SpellPortal;
+        input.Hero.ActionSpellLight.performed += SpellLight;
+    }
+
+    private void Update()
+    {
+        Move();
     }
 
     private void OnEnable()
@@ -28,7 +37,9 @@ public class HeroInputController : MonoBehaviour
         input.Disable();
     }
 
-    private void Update()
+ 
+
+    private void Move()
     {
         hero.inputUserDirection = input.Hero.Move.ReadValue<Vector2>();
     }
@@ -48,15 +59,18 @@ public class HeroInputController : MonoBehaviour
         if(playerView != null) playerView.look = callback.ReadValue<Vector2>();
     }
 
-    private void OnFootstep(AnimationEvent animationEvent)
+    private void SpellActivate(InputAction.CallbackContext callback)
     {
-        //if (animationEvent.animatorClipInfo.weight > 0.5f)
-        //{
-        //    if (FootstepAudioClips.Length > 0)
-        //    {
-        //        var index = Random.Range(0, FootstepAudioClips.Length);
-        //        AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
-        //    }
-        //}
+        hero.OnSpellActivate?.Invoke();
+    }
+
+    private void SpellPortal(InputAction.CallbackContext callback)
+    {
+        hero.OnSpellPortal?.Invoke();
+    }
+
+    private void SpellLight(InputAction.CallbackContext callback)
+    {
+        hero.OnSpellLight?.Invoke();
     }
 }

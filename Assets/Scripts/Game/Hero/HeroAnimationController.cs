@@ -2,69 +2,81 @@ using UnityEngine;
 
 public class HeroAnimationController : MonoBehaviour
 {
-    public Animator _animator;
-    public Hero hero;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Hero hero;
+
+    private float animationBlend;
 
     // animation IDs
-    private int _animIDSpeed;
-    private int _animIDGrounded;
-    private int _animIDJump;
-    private int _animIDFreeFall;
-    private int _animIDMotionSpeed;
-
-    private float _animationBlend;
-    private bool _hasAnimator;
+    private int animIDSpeed;
+    private int animIDGrounded;
+    private int animIDJump;
+    private int animIDFreeFall;
+    private int animIDMotionSpeed;
+    private int animIDSpellActivate;
+    private int animIDSpellPortal;
+    private int animIDSpellLight;
 
 
     private void Start()
     {
-        _hasAnimator = _animator != null;
-
         AssignAnimationIDs();
     }
 
     private void AssignAnimationIDs()
     {
-        _animIDSpeed = Animator.StringToHash("MoveSpeed");
-        _animIDGrounded = Animator.StringToHash("Grounded");
-        _animIDJump = Animator.StringToHash("Jump");
-        _animIDFreeFall = Animator.StringToHash("FreeFall");
-        _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+        animIDSpeed = Animator.StringToHash("MoveSpeed");
+        animIDGrounded = Animator.StringToHash("Grounded");
+        animIDJump = Animator.StringToHash("Jump");
+        animIDFreeFall = Animator.StringToHash("FreeFall");
+        animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+
+        animIDSpellActivate = Animator.StringToHash("SpellActivate");
+        animIDSpellPortal = Animator.StringToHash("SpellPortal");
+        animIDSpellLight = Animator.StringToHash("SpellLight");
     }
 
     private void Update()
     {
-        //_hasAnimator = TryGetComponent(out _animator);
-
-        if (!_hasAnimator) return;
+        if (animator == null) return;
         AnimationMove();
         AnimationGround();
         AnimationFall();
     }
+    private void OnEnable()
+    {
+        hero.OnSpellActivate += AnimationSpellActivate;
+        hero.OnSpellPortal += AnimationSpellPortal;
+        hero.OnSpellLight += AnimationSpellLight;
+    }
 
-
+    private void OnDisable()
+    {
+        hero.OnSpellActivate -= AnimationSpellActivate;
+        hero.OnSpellPortal -= AnimationSpellPortal;
+        hero.OnSpellLight -= AnimationSpellLight;
+    }
 
     private void AnimationMove()
     {
-        _animationBlend = Mathf.Lerp(_animationBlend, hero.targetSpeed, Time.deltaTime * hero.SpeedChangeRate);
-        if (_animationBlend < 0.01f) _animationBlend = 0f;
+        animationBlend = Mathf.Lerp(animationBlend, hero.TargetSpeed, Time.deltaTime * hero.speedChangeRate);
+        if (animationBlend < 0.01f) animationBlend = 0f;
 
-        _animator.SetFloat(_animIDSpeed, _animationBlend);
-        _animator.SetFloat(_animIDMotionSpeed, NormalizedToOne(hero.inputUserDirection).magnitude);
+        animator.SetFloat(animIDSpeed, animationBlend);
+        animator.SetFloat(animIDMotionSpeed, NormalizedToOne(hero.inputUserDirection).magnitude);
     }
 
     private void AnimationGround()
     {
-        _animator.SetBool(_animIDGrounded, hero.Move.Grounded);
+        animator.SetBool(animIDGrounded, hero.Move.Grounded);
 
+        if (!hero.Move.Grounded) return;
 
-        if (hero.Move.Grounded)
-        {
-            bool jump = hero.Move.jump && hero.Move._jumpTimeoutDelta <= 0.0f;
-            _animator.SetBool(_animIDJump, jump);
+        bool jump = hero.Move.jump && hero.Move._jumpTimeoutDelta <= 0.0f;
+        animator.SetBool(animIDJump, jump);
 
-            _animator.SetBool(_animIDFreeFall, false);
-        }
+        animator.SetBool(animIDFreeFall, false);
+
     }
 
     private void AnimationFall()
@@ -72,7 +84,22 @@ public class HeroAnimationController : MonoBehaviour
         if (hero.Move.Grounded) return;
 
         if (hero.Move._fallTimeoutDelta < 0.0f)
-            _animator.SetBool(_animIDFreeFall, true);
+            animator.SetBool(animIDFreeFall, true);
+    }
+
+    private void AnimationSpellActivate()
+    {
+        animator.SetTrigger(animIDSpellActivate);
+    }
+
+    private void AnimationSpellPortal()
+    {
+        animator.SetTrigger(animIDSpellPortal);
+    }
+
+    private void AnimationSpellLight()
+    {
+        animator.SetTrigger(animIDSpellLight);
     }
 
     private Vector2 NormalizedToOne(Vector2 vector)

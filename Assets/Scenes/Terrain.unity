@@ -909,6 +909,18 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 5930817237687634353, guid: 33d0dd8b1f7429e46b27426a5e20e447, type: 3}
+      propertyPath: rotationSmoothTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5930817237687634353, guid: 33d0dd8b1f7429e46b27426a5e20e447, type: 3}
+      propertyPath: groundLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7130650995064527070, guid: 33d0dd8b1f7429e46b27426a5e20e447, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1416874745}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33d0dd8b1f7429e46b27426a5e20e447, type: 3}
 --- !u!4 &1163545012 stripped
@@ -5851,6 +5863,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3579650968113916561, guid: bd4b111293a00f84b9832095ac84f46e, type: 3}
   m_PrefabInstance: {fileID: 767598367}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1416874745 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 907857830089910324, guid: 33d0dd8b1f7429e46b27426a5e20e447, type: 3}
+  m_PrefabInstance: {fileID: 1163545011}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1488233740
 GameObject:

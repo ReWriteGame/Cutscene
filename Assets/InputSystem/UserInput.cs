@@ -64,7 +64,7 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ActionMagic1"",
+                    ""name"": ""ActionSpellActivate"",
                     ""type"": ""Button"",
                     ""id"": ""2ab8910f-bce2-4f46-b2d1-5f20f2ccca37"",
                     ""expectedControlType"": ""Button"",
@@ -73,7 +73,7 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ActionMagic2"",
+                    ""name"": ""ActionSpellPortal"",
                     ""type"": ""Button"",
                     ""id"": ""dcf31446-55dc-4565-83e8-44f815bd5fae"",
                     ""expectedControlType"": ""Button"",
@@ -82,7 +82,7 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""ActionMagic3"",
+                    ""name"": ""ActionSpellLight"",
                     ""type"": ""Button"",
                     ""id"": ""e131b391-8141-40e8-adbd-e6014ce77889"",
                     ""expectedControlType"": ""Button"",
@@ -231,7 +231,7 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""ActionMagic1"",
+                    ""action"": ""ActionSpellActivate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -242,7 +242,7 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""ActionMagic2"",
+                    ""action"": ""ActionSpellPortal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -253,7 +253,7 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""ActionMagic3"",
+                    ""action"": ""ActionSpellLight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -328,9 +328,9 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
         m_Hero_Move = m_Hero.FindAction("Move", throwIfNotFound: true);
         m_Hero_Sprint = m_Hero.FindAction("Sprint", throwIfNotFound: true);
         m_Hero_Jump = m_Hero.FindAction("Jump", throwIfNotFound: true);
-        m_Hero_ActionMagic1 = m_Hero.FindAction("ActionMagic1", throwIfNotFound: true);
-        m_Hero_ActionMagic2 = m_Hero.FindAction("ActionMagic2", throwIfNotFound: true);
-        m_Hero_ActionMagic3 = m_Hero.FindAction("ActionMagic3", throwIfNotFound: true);
+        m_Hero_ActionSpellActivate = m_Hero.FindAction("ActionSpellActivate", throwIfNotFound: true);
+        m_Hero_ActionSpellPortal = m_Hero.FindAction("ActionSpellPortal", throwIfNotFound: true);
+        m_Hero_ActionSpellLight = m_Hero.FindAction("ActionSpellLight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -394,9 +394,9 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Hero_Move;
     private readonly InputAction m_Hero_Sprint;
     private readonly InputAction m_Hero_Jump;
-    private readonly InputAction m_Hero_ActionMagic1;
-    private readonly InputAction m_Hero_ActionMagic2;
-    private readonly InputAction m_Hero_ActionMagic3;
+    private readonly InputAction m_Hero_ActionSpellActivate;
+    private readonly InputAction m_Hero_ActionSpellPortal;
+    private readonly InputAction m_Hero_ActionSpellLight;
     public struct HeroActions
     {
         private @UserInput m_Wrapper;
@@ -405,9 +405,9 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Hero_Move;
         public InputAction @Sprint => m_Wrapper.m_Hero_Sprint;
         public InputAction @Jump => m_Wrapper.m_Hero_Jump;
-        public InputAction @ActionMagic1 => m_Wrapper.m_Hero_ActionMagic1;
-        public InputAction @ActionMagic2 => m_Wrapper.m_Hero_ActionMagic2;
-        public InputAction @ActionMagic3 => m_Wrapper.m_Hero_ActionMagic3;
+        public InputAction @ActionSpellActivate => m_Wrapper.m_Hero_ActionSpellActivate;
+        public InputAction @ActionSpellPortal => m_Wrapper.m_Hero_ActionSpellPortal;
+        public InputAction @ActionSpellLight => m_Wrapper.m_Hero_ActionSpellLight;
         public InputActionMap Get() { return m_Wrapper.m_Hero; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -429,15 +429,15 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnJump;
-                @ActionMagic1.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic1;
-                @ActionMagic1.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic1;
-                @ActionMagic1.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic1;
-                @ActionMagic2.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic2;
-                @ActionMagic2.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic2;
-                @ActionMagic2.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic2;
-                @ActionMagic3.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic3;
-                @ActionMagic3.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic3;
-                @ActionMagic3.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic3;
+                @ActionSpellActivate.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionSpellActivate;
+                @ActionSpellActivate.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionSpellActivate;
+                @ActionSpellActivate.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionSpellActivate;
+                @ActionSpellPortal.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionSpellPortal;
+                @ActionSpellPortal.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionSpellPortal;
+                @ActionSpellPortal.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionSpellPortal;
+                @ActionSpellLight.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionSpellLight;
+                @ActionSpellLight.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionSpellLight;
+                @ActionSpellLight.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionSpellLight;
             }
             m_Wrapper.m_HeroActionsCallbackInterface = instance;
             if (instance != null)
@@ -454,15 +454,15 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @ActionMagic1.started += instance.OnActionMagic1;
-                @ActionMagic1.performed += instance.OnActionMagic1;
-                @ActionMagic1.canceled += instance.OnActionMagic1;
-                @ActionMagic2.started += instance.OnActionMagic2;
-                @ActionMagic2.performed += instance.OnActionMagic2;
-                @ActionMagic2.canceled += instance.OnActionMagic2;
-                @ActionMagic3.started += instance.OnActionMagic3;
-                @ActionMagic3.performed += instance.OnActionMagic3;
-                @ActionMagic3.canceled += instance.OnActionMagic3;
+                @ActionSpellActivate.started += instance.OnActionSpellActivate;
+                @ActionSpellActivate.performed += instance.OnActionSpellActivate;
+                @ActionSpellActivate.canceled += instance.OnActionSpellActivate;
+                @ActionSpellPortal.started += instance.OnActionSpellPortal;
+                @ActionSpellPortal.performed += instance.OnActionSpellPortal;
+                @ActionSpellPortal.canceled += instance.OnActionSpellPortal;
+                @ActionSpellLight.started += instance.OnActionSpellLight;
+                @ActionSpellLight.performed += instance.OnActionSpellLight;
+                @ActionSpellLight.canceled += instance.OnActionSpellLight;
             }
         }
     }
@@ -491,8 +491,8 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnActionMagic1(InputAction.CallbackContext context);
-        void OnActionMagic2(InputAction.CallbackContext context);
-        void OnActionMagic3(InputAction.CallbackContext context);
+        void OnActionSpellActivate(InputAction.CallbackContext context);
+        void OnActionSpellPortal(InputAction.CallbackContext context);
+        void OnActionSpellLight(InputAction.CallbackContext context);
     }
 }

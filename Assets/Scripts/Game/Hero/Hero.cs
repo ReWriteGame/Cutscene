@@ -1,42 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
 [SelectionBase]
 public class Hero : MonoBehaviour
 {
+    public Vector2 inputUserDirection;
+
     [SerializeField] private Move move;
-    [SerializeField] public float moveSpeed = 1;
-    [SerializeField] public float sprintSpeed = 5;
-    public float SpeedChangeRate = 10.0f;
+    [SerializeField] private float moveSpeed = 1;
+    [SerializeField] private float sprintSpeed = 5;
+    [Range(0.0f, 0.5f)]
+    [SerializeField] private float rotationSmoothTime = 0.12f;
+
+    public float speedChangeRate = 10.0f;
     public float speedOffset = 0.1f;
 
     public bool sprint = false;
-    //public Vector2 moveDirection;
     public bool analogMovement = true;
-    public Vector2 inputUserDirection;
 
-    public Camera camera;
+    public float groundedOffset = -0.14f;
+    public float groundedRadius = 0.28f;
+    public LayerMask groundLayers;
 
 
-    [Range(0.0f, 0.5f)]
-    public float RotationSmoothTime = 0.12f;
+    [SerializeField] private Camera camera;
 
-    private float speed;
-    public float targetSpeed;
-    private float currentHorizontalSpeed;
-    float inputMagnitude;
+    public Action OnSpellActivate;
+    public Action OnSpellPortal;
+    public Action OnSpellLight;
 
-    public float GroundedOffset = -0.14f;
-    public float GroundedRadius = 0.28f;
-    public LayerMask GroundLayers;
+
 
     public Move Move => move;
+    public float TargetSpeed => targetSpeed;
 
+    private float speed;
+    private float targetSpeed;
+    private float currentHorizontalSpeed;
+    private float inputMagnitude;
 
-    public Action OnCastActivation;
-
+    
     private void Update()
     {
         MoveLogic();
@@ -61,7 +64,7 @@ public class Hero : MonoBehaviour
             currentHorizontalSpeed > targetSpeed + speedOffset)
         {
             speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                Time.deltaTime * SpeedChangeRate);
+                Time.deltaTime * speedChangeRate);
 
             speed = RoundValue(speed, 1000f);
         }
@@ -73,7 +76,7 @@ public class Hero : MonoBehaviour
     private void RotateLogic()
     {
         float cameraViewDirections = camera != null ? camera.transform.eulerAngles.y : 0; ;
-        move.RotateVector(inputUserDirection, RotationSmoothTime, cameraViewDirections);
+        move.RotateVector(inputUserDirection, rotationSmoothTime, cameraViewDirections);
     }
 
 
@@ -93,9 +96,9 @@ public class Hero : MonoBehaviour
 
     public bool GroundedCheck()
     {
-        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
+        Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - groundedOffset,
             transform.position.z);
-        return Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
+        return Physics.CheckSphere(spherePosition, groundedRadius, groundLayers,
             QueryTriggerInteraction.Ignore);
     }
 }
