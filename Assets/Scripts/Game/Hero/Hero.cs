@@ -72,7 +72,7 @@ public class Hero : MonoBehaviour
 
     private void RotateLogic()
     {
-        float cameraViewDirections = camera.transform.eulerAngles.y;
+        float cameraViewDirections = camera != null ? camera.transform.eulerAngles.y : 0; ;
         move.RotateVector(inputUserDirection, RotationSmoothTime, cameraViewDirections);
     }
 

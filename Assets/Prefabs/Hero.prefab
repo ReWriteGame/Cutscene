@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1352652040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1352652041}
+  m_Layer: 0
+  m_Name: PlayerCameraRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1352652041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352652040}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.379, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4886849632518946491}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &281909773822045887
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,6 +77,9 @@ GameObject:
   - component: {fileID: 5930817237687634353}
   - component: {fileID: 7130650995064527070}
   - component: {fileID: 101380940}
+  - component: {fileID: 1607610939}
+  - component: {fileID: 1607610947}
+  - component: {fileID: 1607610948}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -67,6 +101,7 @@ Transform:
   m_Children:
   - {fileID: 798230733980012505}
   - {fileID: 3944704376827723621}
+  - {fileID: 1352652041}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,7 +117,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e7081d65f07ba4794c5d63e893a17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 16
+  move: {fileID: 1607610947}
+  moveSpeed: 2
+  sprintSpeed: 5
+  SpeedChangeRate: 10
+  speedOffset: 0.1
+  sprint: 0
+  analogMovement: 1
+  inputUserDirection: {x: 0, y: 0}
+  camera: {fileID: 0}
+  RotationSmoothTime: 0.12
+  targetSpeed: 0
+  GroundedOffset: -0.14
+  GroundedRadius: 0.28
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &7130650995064527070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,8 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc05907bd726e54ba25af34f102a1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 907857830089910324}
   hero: {fileID: 5930817237687634353}
-  animator: {fileID: 907857830089910324}
 --- !u!114 &101380940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +164,59 @@ MonoBehaviour:
   leftHandActivateEffect: {fileID: 3417533666473976038}
   rightHandActivateEffect: {fileID: 1773813752361825036}
   delayExploding: 2.1
+--- !u!143 &1607610939
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5626650513144342761}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.8
+  m_Radius: 0.25
+  m_SlopeLimit: 45
+  m_StepOffset: 0.25
+  m_SkinWidth: 0.02
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 0.87, z: 0}
+--- !u!114 &1607610947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5626650513144342761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a1477052e45a8d4f888ef509b04c4d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1607610939}
+  JumpHeight: 1.2
+  Gravity: -15
+  JumpTimeout: 0.3
+  FallTimeout: 0.15
+  jump: 0
+  Grounded: 0
+  _jumpTimeoutDelta: 0
+  _fallTimeoutDelta: 0
+--- !u!114 &1607610948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5626650513144342761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de58ce5bd1eac2241934c6e055f6e40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hero: {fileID: 5930817237687634353}
+  playerView: {fileID: 0}
 --- !u!1001 &907857830089910322
 PrefabInstance:
   m_ObjectHideFlags: 0

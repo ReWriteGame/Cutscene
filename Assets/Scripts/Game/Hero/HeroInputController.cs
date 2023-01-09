@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class HeroInputController : MonoBehaviour
 {
     [SerializeField] private Hero hero;
+    [SerializeField] private CameraLogic playerView;
 
     private UserInput input;
 
@@ -14,6 +15,7 @@ public class HeroInputController : MonoBehaviour
         input = new UserInput();
         input.Hero.Jump.performed += Jump;
         input.Hero.Sprint.performed += Sprint;
+        input.Hero.Look.performed += Look;
     }
 
     private void OnEnable()
@@ -39,6 +41,11 @@ public class HeroInputController : MonoBehaviour
     private void Sprint(InputAction.CallbackContext callback)
     {
         hero.sprint = Convert.ToBoolean(callback.ReadValue<float>());
+    }
+
+    private void Look(InputAction.CallbackContext callback)
+    {
+        if(playerView != null) playerView.look = callback.ReadValue<Vector2>();
     }
 
     private void OnFootstep(AnimationEvent animationEvent)
