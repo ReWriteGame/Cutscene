@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class HeroController : MonoBehaviour
+[SelectionBase]
+public class Hero : MonoBehaviour
 {
     [SerializeField] private Move move;
     [SerializeField] public float moveSpeed = 1;
@@ -19,8 +20,6 @@ public class HeroController : MonoBehaviour
     public Camera camera;
 
 
-    public Action OnCastActivation;
-
     [Range(0.0f, 0.5f)]
     public float RotationSmoothTime = 0.12f;
 
@@ -32,6 +31,11 @@ public class HeroController : MonoBehaviour
     public float GroundedOffset = -0.14f;
     public float GroundedRadius = 0.28f;
     public LayerMask GroundLayers;
+
+    public Move Move => move;
+
+
+    public Action OnCastActivation;
 
     private void Update()
     {

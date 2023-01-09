@@ -28,6 +28,15 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
             ""id"": ""a0d526cf-36d9-47c9-a46b-c1b1f614186a"",
             ""actions"": [
                 {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""1b551783-6300-4d23-9ab0-f2b2c7fd3e74"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""08bdc300-f868-4419-b01d-5f6082ddcc8a"",
@@ -67,6 +76,15 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                     ""name"": ""ActionMagic2"",
                     ""type"": ""Button"",
                     ""id"": ""dcf31446-55dc-4565-83e8-44f815bd5fae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ActionMagic3"",
+                    ""type"": ""Button"",
+                    ""id"": ""e131b391-8141-40e8-adbd-e6014ce77889"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -227,6 +245,39 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                     ""action"": ""ActionMagic2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35825775-2bc3-4ecf-a0e9-b12293707279"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActionMagic3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82419a6c-3292-48c8-96d0-20e78e66a296"",
+                    ""path"": ""<Pointer>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""926644e4-4a10-4f1b-97fd-f83875b6750a"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -273,11 +324,13 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
 }");
         // Hero
         m_Hero = asset.FindActionMap("Hero", throwIfNotFound: true);
+        m_Hero_Look = m_Hero.FindAction("Look", throwIfNotFound: true);
         m_Hero_Move = m_Hero.FindAction("Move", throwIfNotFound: true);
         m_Hero_Sprint = m_Hero.FindAction("Sprint", throwIfNotFound: true);
         m_Hero_Jump = m_Hero.FindAction("Jump", throwIfNotFound: true);
         m_Hero_ActionMagic1 = m_Hero.FindAction("ActionMagic1", throwIfNotFound: true);
         m_Hero_ActionMagic2 = m_Hero.FindAction("ActionMagic2", throwIfNotFound: true);
+        m_Hero_ActionMagic3 = m_Hero.FindAction("ActionMagic3", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -337,20 +390,24 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
     // Hero
     private readonly InputActionMap m_Hero;
     private IHeroActions m_HeroActionsCallbackInterface;
+    private readonly InputAction m_Hero_Look;
     private readonly InputAction m_Hero_Move;
     private readonly InputAction m_Hero_Sprint;
     private readonly InputAction m_Hero_Jump;
     private readonly InputAction m_Hero_ActionMagic1;
     private readonly InputAction m_Hero_ActionMagic2;
+    private readonly InputAction m_Hero_ActionMagic3;
     public struct HeroActions
     {
         private @UserInput m_Wrapper;
         public HeroActions(@UserInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Look => m_Wrapper.m_Hero_Look;
         public InputAction @Move => m_Wrapper.m_Hero_Move;
         public InputAction @Sprint => m_Wrapper.m_Hero_Sprint;
         public InputAction @Jump => m_Wrapper.m_Hero_Jump;
         public InputAction @ActionMagic1 => m_Wrapper.m_Hero_ActionMagic1;
         public InputAction @ActionMagic2 => m_Wrapper.m_Hero_ActionMagic2;
+        public InputAction @ActionMagic3 => m_Wrapper.m_Hero_ActionMagic3;
         public InputActionMap Get() { return m_Wrapper.m_Hero; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -360,6 +417,9 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_HeroActionsCallbackInterface != null)
             {
+                @Look.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnLook;
                 @Move.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnMove;
@@ -375,10 +435,16 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                 @ActionMagic2.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic2;
                 @ActionMagic2.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic2;
                 @ActionMagic2.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic2;
+                @ActionMagic3.started -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic3;
+                @ActionMagic3.performed -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic3;
+                @ActionMagic3.canceled -= m_Wrapper.m_HeroActionsCallbackInterface.OnActionMagic3;
             }
             m_Wrapper.m_HeroActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
@@ -394,6 +460,9 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
                 @ActionMagic2.started += instance.OnActionMagic2;
                 @ActionMagic2.performed += instance.OnActionMagic2;
                 @ActionMagic2.canceled += instance.OnActionMagic2;
+                @ActionMagic3.started += instance.OnActionMagic3;
+                @ActionMagic3.performed += instance.OnActionMagic3;
+                @ActionMagic3.canceled += instance.OnActionMagic3;
             }
         }
     }
@@ -418,10 +487,12 @@ public partial class @UserInput : IInputActionCollection2, IDisposable
     }
     public interface IHeroActions
     {
+        void OnLook(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnActionMagic1(InputAction.CallbackContext context);
         void OnActionMagic2(InputAction.CallbackContext context);
+        void OnActionMagic3(InputAction.CallbackContext context);
     }
 }

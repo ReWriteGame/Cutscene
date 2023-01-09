@@ -4,8 +4,7 @@ using UnityEngine.InputSystem;
 
 public class HeroInputController : MonoBehaviour
 {
-    [SerializeField] private Move move;
-    [SerializeField] private HeroController hero;
+    [SerializeField] private Hero hero;
 
     private UserInput input;
 
@@ -34,7 +33,7 @@ public class HeroInputController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext callback)
     {
-        move.jump = true;
+        hero.Move.jump = true;
     }
 
     private void Sprint(InputAction.CallbackContext callback)
@@ -42,5 +41,15 @@ public class HeroInputController : MonoBehaviour
         hero.sprint = Convert.ToBoolean(callback.ReadValue<float>());
     }
 
-   
+    private void OnFootstep(AnimationEvent animationEvent)
+    {
+        //if (animationEvent.animatorClipInfo.weight > 0.5f)
+        //{
+        //    if (FootstepAudioClips.Length > 0)
+        //    {
+        //        var index = Random.Range(0, FootstepAudioClips.Length);
+        //        AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
+        //    }
+        //}
+    }
 }

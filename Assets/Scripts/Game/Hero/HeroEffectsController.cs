@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HeroEffectsController : MonoBehaviour
 {
-    [SerializeField] private HeroController hero;
+    [SerializeField] private Hero hero;
     [SerializeField] private GameObject centerActivateEffect;
     [SerializeField] private GameObject leftHandActivateEffect;
     [SerializeField] private GameObject rightHandActivateEffect;

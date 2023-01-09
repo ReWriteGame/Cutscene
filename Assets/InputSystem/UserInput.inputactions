@@ -6,6 +6,15 @@
             "id": "a0d526cf-36d9-47c9-a46b-c1b1f614186a",
             "actions": [
                 {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "1b551783-6300-4d23-9ab0-f2b2c7fd3e74",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Move",
                     "type": "Value",
                     "id": "08bdc300-f868-4419-b01d-5f6082ddcc8a",
@@ -45,6 +54,15 @@
                     "name": "ActionMagic2",
                     "type": "Button",
                     "id": "dcf31446-55dc-4565-83e8-44f815bd5fae",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ActionMagic3",
+                    "type": "Button",
+                    "id": "e131b391-8141-40e8-adbd-e6014ce77889",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -203,6 +221,39 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "ActionMagic2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "35825775-2bc3-4ecf-a0e9-b12293707279",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActionMagic3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82419a6c-3292-48c8-96d0-20e78e66a296",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "926644e4-4a10-4f1b-97fd-f83875b6750a",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
