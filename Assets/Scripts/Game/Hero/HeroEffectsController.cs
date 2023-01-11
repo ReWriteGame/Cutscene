@@ -11,14 +11,14 @@ public class HeroEffectsController : MonoBehaviour
   
     private void OnEnable()
     {
-        //hero.OnCastActivation += ActivateEffect;
-        //hero.OnCast += CastEffect;
+        hero.OnSpellPortal += ActivateEffect;
+        hero.OnSpellPortal += CastEffect;
     }
 
     private void OnDisable()
     {
-        hero.OnSpellActivate -= ActivateEffect;
-        hero.OnSpellActivate -= CastEffect;
+        hero.OnSpellPortal -= ActivateEffect;
+        hero.OnSpellPortal -= CastEffect;
     }
 
     private void CastEffect()
