@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Tools.Animations
@@ -15,11 +13,11 @@ namespace Tools.Animations
         [SerializeField] private AnimationCurve rotationCurve = AnimationCurve.Constant(0, 1, 1);
         [Space]
         [SerializeField] private bool playOnAwake = true;
+        //[SerializeField] private bool playOnAwake = true;
         [SerializeField] private bool animated;
         
         private Transform transformObject;
         private float time = 0;
-        private float scale—urve;
 
         private void Awake()
         {
@@ -32,7 +30,7 @@ namespace Tools.Animations
         {
             if (animated)
             {
-                scale—urve = useCurve ? rotationCurve.Evaluate(Mathf.InverseLerp(0, ÒurveTime - Time.fixedDeltaTime, time)) : 1;
+                float scale—urve = useCurve ? rotationCurve.Evaluate(Mathf.InverseLerp(0, ÒurveTime - Time.fixedDeltaTime, time)) : 1;
                 transformObject.rotation *= Quaternion.Euler(direction.normalized * 7.2f * rotatePerSeconds * scale—urve);
 
                 time += Time.fixedDeltaTime;
