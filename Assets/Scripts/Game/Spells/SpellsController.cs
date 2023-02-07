@@ -5,9 +5,11 @@ using UnityEngine;
 public class SpellsController : MonoBehaviour
 {
     [SerializeField] private Hero hero;
-    [SerializeField] private GameObject lightSpellPrefab;
+    [SerializeField] private LightSpell lightSpellPrefab;
     [SerializeField] private Transform rightHand;
+    [SerializeField] private Transform targetMovePoint;
     [SerializeField] private Vector3 shiftSpawn;
+    [SerializeField] private float delayToFollow = 1;
 
 
     private void OnEnable()
@@ -26,13 +28,16 @@ public class SpellsController : MonoBehaviour
         StartCoroutine(LightSpellRoutine());
     }
 
+
     private IEnumerator LightSpellRoutine()
     {
-        GameObject spell = Instantiate(lightSpellPrefab, rightHand);
+        LightSpell spell = Instantiate(lightSpellPrefab, rightHand);
         spell.transform.position = rightHand.position + shiftSpawn;
 
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(1f);
         spell.transform.SetParent(null, true);
+        yield return new WaitForSeconds(delayToFollow);
+        spell.SetTargetMove(targetMovePoint);
     }
 
 }

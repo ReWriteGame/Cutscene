@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4642979175072624286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8811292657492155116}
+  m_Layer: 0
+  m_Name: PointForEffects
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8811292657492155116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4642979175072624286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5.75, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5997244558114373196}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5997244558088845933
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,12 +87,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5997244558114373195}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5997244559316000737}
+  - {fileID: 8811292657492155116}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -217,6 +249,10 @@ PrefabInstance:
     - target: {fileID: 5501185551814691851, guid: be5074ed159ea2f46a071e05017dad74, type: 3}
       propertyPath: m_Name
       value: AltarAtivationEffects
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501185551814691851, guid: be5074ed159ea2f46a071e05017dad74, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5501185552027679703, guid: be5074ed159ea2f46a071e05017dad74, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -5054,7 +5090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f0ad3b6e0d869e54a83d222bddd0a0b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.69
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f0ad3b6e0d869e54a83d222bddd0a0b4, type: 3}
       propertyPath: m_LocalPosition.z
