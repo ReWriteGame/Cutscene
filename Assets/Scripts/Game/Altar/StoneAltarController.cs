@@ -5,7 +5,7 @@ public class StoneAltarController : MonoBehaviour
 {
     [SerializeField] private Altar altar;
     [SerializeField] private Transform pointForSkill;
-    [SerializeField] private GameObject boss;
+    [SerializeField] private BossMaw boss;
     [SerializeField] private DicesController dicesController;
     [SerializeField] private float delayActivation = 1;
     [SerializeField] private float sizeScaleLight = 30;
@@ -38,7 +38,9 @@ public class StoneAltarController : MonoBehaviour
         yield return new WaitForSeconds(delayActivation);
 
         altar.Activate();
-        boss.SetActive(true);
         dicesController.ActivateDices();
+
+        yield return new WaitForSeconds(4);
+        boss.Activate();
     }
 }

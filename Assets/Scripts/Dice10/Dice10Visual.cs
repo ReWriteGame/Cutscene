@@ -45,13 +45,13 @@ public class Dice10Visual : MonoBehaviour
     public void ShowSymbols()
     {
         if (opacityCor != null) StopCoroutine(opacityCor);
-        opacityCor = StartCoroutine(ChangeOpacitySymbols(1, timeShowText));
+        opacityCor = StartCoroutine(ChangeOpacitySymbolsRoutine(1, timeShowText));
     }
 
     public void HideSymbols()
     {
         if (opacityCor != null) StopCoroutine(opacityCor);
-        opacityCor = StartCoroutine(ChangeOpacitySymbols(0, timeShowText));
+        opacityCor = StartCoroutine(ChangeOpacitySymbolsRoutine(0, timeShowText));
     }
 
     private void ChangeTransparencySymbol(TMP_Text text, float value)
@@ -62,7 +62,7 @@ public class Dice10Visual : MonoBehaviour
     }
 
 
-    private IEnumerator ChangeOpacitySymbols(float opacity, float timeDuration)
+    private IEnumerator ChangeOpacitySymbolsRoutine(float opacity, float timeDuration)
     {
         float currentValue = symbols[0].color.a;
 
@@ -73,6 +73,7 @@ public class Dice10Visual : MonoBehaviour
 
             foreach (var symbol in symbols)
                 ChangeTransparencySymbol(symbol, opacityValue);
+
             yield return null;
         }
     }
