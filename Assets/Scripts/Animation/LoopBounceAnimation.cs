@@ -5,35 +5,48 @@ using UnityEngine;
 public class LoopBounceAnimation : MonoBehaviour
 {
     [SerializeField] private Vector3 direction = Vector3.up;
+    [SerializeField] private Vector3 addShiftDistance;
     [SerializeField] private float heightBounce;
-    [SerializeField][Min(0)] private float bouncePerSeconds = 1;
-
-    [SerializeField][Min(0)] private bool useCurve = false;
-    [SerializeField][Min(0)] private float ñurveTime = 1;
-    [SerializeField] private AnimationCurve rotationCurve = AnimationCurve.Constant(0, 1, 1);
-    [Space]
-    [SerializeField] private bool playOnAwake = true;
-    //[SerializeField] private bool playOnAwake = true;
+    [SerializeField] private float speedMove;
     [SerializeField] private bool animated;
 
-    private Transform transformObject;
-    private float time = 0;
+    [SerializeField] private bool useDelay;
+    [SerializeField] private Vector2 delay;
+    [SerializeField] private bool playOnAwake = true;
 
-    private void Awake()
+
+    private bool isUpMove = true;
+
+
+
+    private void Start()
     {
-        transformObject = GetComponent<Transform>();
-        if (playOnAwake) Play();
+        StartCoroutine(Bounce());
+        if(playOnAwake) Play();
     }
 
 
     private IEnumerator Bounce()
     {
-        //while (true)
-        //{
-        //      transformObject.position
-        //    yield return null;
-        //}
-        yield return null;
+        Vector3 startPosition = transform.position;
+
+        if(useDelay) yield return new WaitForSeconds(Random.Range(delay.x, delay.y));
+
+        while (true)
+        {
+            if (animated)
+            {
+                Vector3 velocity = Vector3.zero;
+                Vector3 targetPoint = startPosition + direction.normalized * heightBounce * (isUpMove ? 1 : -1);
+
+                if (Vector3.Distance(transform.position, targetPoint + addShiftDistance) > 0.01f)
+                    velocity = direction.normalized * speedMove * (isUpMove ? 1 : -1);
+                else isUpMove = !isUpMove;
+
+                transform.position += velocity * Time.deltaTime;
+            }
+            yield return null;
+        }
     }
     public void Play()
     {

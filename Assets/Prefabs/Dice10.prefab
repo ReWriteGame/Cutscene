@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 8975916312543815337}
   - component: {fileID: 7512867951290173537}
   - component: {fileID: 6955437428229146643}
+  - component: {fileID: 3795658943284697324}
   m_Layer: 0
   m_Name: Dice10
   m_TagString: Untagged
@@ -227,6 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dice10: {fileID: 7512867951290173537}
   loopRotateAnimation: {fileID: 3579650966341381091}
+  loopBounceAnimation: {fileID: 3795658943284697324}
   particle: {fileID: 6135062809767070955}
   symbols:
   - {fileID: 4664833242169460346}
@@ -240,6 +242,26 @@ MonoBehaviour:
   - {fileID: 179166271649347452}
   - {fileID: 8415691649398711186}
   timeShowText: 5
+--- !u!114 &3795658943284697324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3579650968113916560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa2adb33d1fddc2479b75dbad9c07409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 1, z: 0}
+  addShiftDistance: {x: 0, y: 0.1, z: 0}
+  heightBounce: 0.2
+  speedMove: 0.12
+  animated: 1
+  useDelay: 1
+  delay: {x: 0.1, y: 5}
+  playOnAwake: 0
 --- !u!1 &3946640907697196622
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +384,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -419,9 +441,9 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3

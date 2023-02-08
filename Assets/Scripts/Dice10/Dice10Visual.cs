@@ -8,6 +8,7 @@ public class Dice10Visual : MonoBehaviour
 {
     [SerializeField] private Dice10 dice10;
     [SerializeField] private LoopRotateAnimation loopRotateAnimation;
+    [SerializeField] private LoopBounceAnimation loopBounceAnimation;
     [SerializeField] private ParticleSystem particle;
     [SerializeField] private TMP_Text[] symbols;
     [SerializeField] private float timeShowText;
@@ -23,6 +24,7 @@ public class Dice10Visual : MonoBehaviour
 
         dice10.OnActivate += ShowSymbols;
         dice10.OnActivate += loopRotateAnimation.Play;
+        dice10.OnActivate += loopBounceAnimation.Play;
         dice10.OnActivate += particle.Play;
     }
 
@@ -30,6 +32,7 @@ public class Dice10Visual : MonoBehaviour
     {
         dice10.OnActivate -= ShowSymbols;
         dice10.OnActivate -= loopRotateAnimation.Play;
+        dice10.OnActivate -= loopBounceAnimation.Play;
         dice10.OnActivate -= particle.Play;
     }
     private void Initialize()
@@ -37,9 +40,11 @@ public class Dice10Visual : MonoBehaviour
         foreach (var symbol in symbols)
             ChangeTransparencySymbol(symbol, 0);
 
+        ApplyRandomNumbers();
+
         particle.Stop();
         loopRotateAnimation.Stop();
-
+        loopBounceAnimation.Stop();
     }
 
     public void ShowSymbols()
@@ -52,6 +57,12 @@ public class Dice10Visual : MonoBehaviour
     {
         if (opacityCor != null) StopCoroutine(opacityCor);
         opacityCor = StartCoroutine(ChangeOpacitySymbolsRoutine(0, timeShowText));
+    }
+
+    public void ApplyRandomNumbers()
+    {
+        foreach(var symbol in symbols)
+            symbol.text = $"{ Random.Range(0,9)}";
     }
 
     private void ChangeTransparencySymbol(TMP_Text text, float value)
