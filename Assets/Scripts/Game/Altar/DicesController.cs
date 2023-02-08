@@ -1,24 +1,40 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Tools.Animations;
 
 public class DicesController : MonoBehaviour
 {
-    [SerializeField] private List<LoopRotateAnimation> dicesAnimation;
+    [SerializeField] private List<Dice10> dicesAnimation;
 
 
-    private void Start()
+   
+    public void ActivateDices()
+    {
+        dicesAnimation.ForEach(x => x.Activate());
+    }
+
+
+    /*private void Start()
     {
         DisableAnimationRotate();
     }
-
+  
     public void EnableAnimationRotate()
     {
-        dicesAnimation.ForEach(x => x.Play());
+        dicesAnimation.ForEach(x => x.LoopRotateAnimatio.Play());
     }
 
     public void DisableAnimationRotate()
     {
-        dicesAnimation.ForEach(x => x.Stop());
+        dicesAnimation.ForEach(x => x.LoopRotateAnimatio.Stop());
     }
+
+    public void EnableAnimationShowSymbols()
+    {
+        dicesAnimation.ForEach(x => x.ShowSymbols());
+    }
+
+    public void EnableAnimationHideSymbols()
+    {
+        dicesAnimation.ForEach(x => x.HideSymbols());
+    }*/
 }

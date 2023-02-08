@@ -9,6 +9,7 @@ public class StoneAltarController : MonoBehaviour
     [SerializeField] private DicesController dicesController;
     [SerializeField] private float delayActivation = 1;
     [SerializeField] private float sizeScaleLight = 30;
+    [SerializeField] private float radiusZoneActivation = 1;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -29,7 +30,7 @@ public class StoneAltarController : MonoBehaviour
     {
         spell.SetTargetMove(pointForSkill);
 
-        yield return new WaitUntil(() => spell.transform.position == pointForSkill.position);
+        yield return new WaitUntil(() => Vector3.Distance(spell.transform.position, pointForSkill.position) < radiusZoneActivation);
         spell.EndLight();
         spell.transform.localScale = Vector3.one * sizeScaleLight;
 
@@ -38,6 +39,6 @@ public class StoneAltarController : MonoBehaviour
 
         altar.Activate();
         boss.SetActive(true);
-        dicesController.EnableAnimationRotate();
+        dicesController.ActivateDices();
     }
 }
