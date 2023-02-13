@@ -4,8 +4,9 @@ using System;
 [SelectionBase]
 public class Hero : MonoBehaviour
 {
-    public Vector2 inputUserDirection;
+    [HideInInspector] public Vector2 inputUserDirection;
 
+    [SerializeField] private Camera playerCamera;
     [SerializeField] private Move move;
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] private float sprintSpeed = 5;
@@ -23,12 +24,9 @@ public class Hero : MonoBehaviour
     public LayerMask groundLayers;
 
 
-    [SerializeField] private Camera camera;
-
     public Action OnSpellActivate;
     public Action OnSpellPortal;
     public Action OnSpellLight;
-
 
 
     public Move Move => move;
@@ -70,12 +68,11 @@ public class Hero : MonoBehaviour
         }
 
         move.HorizontalMove(inputUserDirection, speed);
-
     }
 
     private void RotateLogic()
     {
-        float cameraViewDirections = camera != null ? camera.transform.eulerAngles.y : 0; ;
+        float cameraViewDirections = playerCamera != null ? playerCamera.transform.eulerAngles.y : 0; ;
         move.RotateVector(inputUserDirection, rotationSmoothTime, cameraViewDirections);
     }
 

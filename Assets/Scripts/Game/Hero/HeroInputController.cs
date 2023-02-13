@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class HeroInputController : MonoBehaviour
 {
     [SerializeField] private Hero hero;
-    [SerializeField] private CameraLogic playerView;
 
     private UserInput input;
 
@@ -37,7 +36,6 @@ public class HeroInputController : MonoBehaviour
         input.Disable();
     }
 
- 
 
     private void Move()
     {
@@ -56,7 +54,7 @@ public class HeroInputController : MonoBehaviour
 
     private void Look(InputAction.CallbackContext callback)
     {
-        if(playerView != null) playerView.look = callback.ReadValue<Vector2>();
+        // playerView.look = callback.ReadValue<Vector2>();
     }
 
     private void SpellActivate(InputAction.CallbackContext callback)
