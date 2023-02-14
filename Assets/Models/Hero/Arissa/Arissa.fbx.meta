@@ -6,12 +6,32 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Arissa_MAT
+    second: {fileID: 2100000, guid: 05824882d39ecbd42959aba7a33ad049, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Arissa_DIFF_diffuse
+    second: {fileID: 2800000, guid: 166ebb5afba17cb4698f57436419da37, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Arissa_NM_normal
+    second: {fileID: 2800000, guid: 63b238819b4e9eb4283b6b291dda6cb6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Arissa_SPEC_specular
+    second: {fileID: 2800000, guid: 142bbc9910853fa45beb11c2c5bcf605, type: 3}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 2
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
