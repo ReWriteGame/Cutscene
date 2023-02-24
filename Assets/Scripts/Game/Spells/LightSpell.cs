@@ -19,11 +19,11 @@ public class LightSpell : MonoBehaviour
     {
         moveTime = time;
     }
+
     private void Start()
     {
         StartLight();
     }
-
 
     private void Update()
     {

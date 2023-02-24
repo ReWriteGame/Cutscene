@@ -21,6 +21,16 @@ public class HeroInputController : MonoBehaviour
         input.Hero.ActionSpellLight.performed += SpellLight;
     }
 
+    private void OnDestroy()
+    {
+        input.Hero.Jump.performed -= Jump;
+        input.Hero.Sprint.performed -= Sprint;
+        input.Hero.Look.performed -= Look;
+        input.Hero.ActionSpellActivate.performed -= SpellActivate;
+        input.Hero.ActionSpellPortal.performed -= SpellPortal;
+        input.Hero.ActionSpellLight.performed -= SpellLight;
+    }
+
     private void Update()
     {
         Move();
@@ -44,12 +54,12 @@ public class HeroInputController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext callback)
     {
-        hero.Move.jump = true;
+        hero.Move.SetJumpState(true);
     }
 
     private void Sprint(InputAction.CallbackContext callback)
     {
-        hero.sprint = Convert.ToBoolean(callback.ReadValue<float>());
+        hero.Sprint = Convert.ToBoolean(callback.ReadValue<float>());
     }
 
     private void Look(InputAction.CallbackContext callback)

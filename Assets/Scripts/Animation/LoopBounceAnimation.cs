@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LoopBounceAnimation : MonoBehaviour
@@ -16,8 +15,6 @@ public class LoopBounceAnimation : MonoBehaviour
 
 
     private bool isUpMove = true;
-
-
 
     private void Start()
     {

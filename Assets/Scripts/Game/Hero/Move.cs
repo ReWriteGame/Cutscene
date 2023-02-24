@@ -2,33 +2,42 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    [SerializeField] public CharacterController controller;
-    private Vector2 moveDirection;
+    [SerializeField] private CharacterController controller;
 
+    [SerializeField] private float jumpHeight = 1.2f;
+    [SerializeField] private float gravity = -15.0f;
+    [SerializeField] private float jumpTimeout = 0.50f;
+    [SerializeField] private float fallTimeout = 0.15f;
+    [SerializeField] private bool jump = false;
+    [SerializeField] private bool grounded = true;
+
+
+
+    private float verticalVelocity;
+    private float terminalVelocity = 53.0f;
+    private float jumpTimeoutDelta;
+    private float fallTimeoutDelta;
+    private Vector2 moveDirection;
     private float targetRotation;
     private float rotationVelocity;
 
 
+    public Vector2 MoveDirection => moveDirection;
+    public CharacterController Controller => controller;
+    public float FallTimeoutDelta => fallTimeoutDelta;
+    public float JumpTimeoutDelta => jumpTimeoutDelta;
+    public bool Grounded => grounded;
+    public bool Jump => jump;
 
+    public void SetGroundState(bool value)
+    {
+        grounded = value;
+    }
 
-    [Space(10)]
-    public float JumpHeight = 1.2f;
-    public float Gravity = -15.0f;
-    public float JumpTimeout = 0.50f;
-    public float FallTimeout = 0.15f;
-
-    public bool jump = false;
-    public bool Grounded = true;
-
-
-
-    private float _verticalVelocity;
-    private float _terminalVelocity = 53.0f;
-    public float _jumpTimeoutDelta;
-    public float _fallTimeoutDelta;
-
-    public Vector2 MoveDirection { get => moveDirection; }
-
+    public void SetJumpState(bool value)
+    {
+        jump = value;
+    }
     public void HorizontalMove(Vector2 direction, float speed)
     {
         float scaledMoveSpeed = speed * Time.deltaTime;
@@ -38,7 +47,7 @@ public class Move : MonoBehaviour
         Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 
         Vector3 horizontalMove = targetDirection.normalized * scaledMoveSpeed;
-        Vector3 verticalMove = new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime;
+        Vector3 verticalMove = new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime;
         controller.Move(horizontalMove + verticalMove);
     }
 
@@ -61,35 +70,35 @@ public class Move : MonoBehaviour
 
     public void JumpAndGravity()
     {
-        if (Grounded)
+        if (grounded)
         {
-            _fallTimeoutDelta = FallTimeout;
+            fallTimeoutDelta = fallTimeout;
 
 
             // stop our velocity dropping infinitely when grounded
-            if (_verticalVelocity < 0.0f)
-                _verticalVelocity = -2f;
+            if (verticalVelocity < 0.0f)
+                verticalVelocity = -2f;
 
 
-            if (jump && _jumpTimeoutDelta <= 0.0f)
+            if (jump && jumpTimeoutDelta <= 0.0f)
             {
                 // the square root of H * -2 * G = how much velocity needed to reach desired height
-                _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
 
             // jump timeout
-            if (_jumpTimeoutDelta >= 0.0f)
-                _jumpTimeoutDelta -= Time.deltaTime;
+            if (jumpTimeoutDelta >= 0.0f)
+                jumpTimeoutDelta -= Time.deltaTime;
 
         }
         else
         {
             // reset the jump timeout timer
-            _jumpTimeoutDelta = JumpTimeout;
+            jumpTimeoutDelta = jumpTimeout;
 
             // fall timeout
-            if (_fallTimeoutDelta >= 0.0f)
-                _fallTimeoutDelta -= Time.deltaTime;
+            if (fallTimeoutDelta >= 0.0f)
+                fallTimeoutDelta -= Time.deltaTime;
 
 
             // if we are not grounded, do not jump
@@ -97,12 +106,9 @@ public class Move : MonoBehaviour
         }
 
         // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-        if (_verticalVelocity < _terminalVelocity)
-            _verticalVelocity += Gravity * Time.deltaTime;
-
+        if (verticalVelocity < terminalVelocity)
+            verticalVelocity += gravity * Time.deltaTime;
     }
-
-
 }
 
 

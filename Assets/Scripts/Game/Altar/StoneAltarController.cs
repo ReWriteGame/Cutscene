@@ -13,17 +13,8 @@ public class StoneAltarController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        /*if (other.gameObject.GetComponent<Hero>())
-        {
-            altar.Activate();
-            boss.SetActive(true);
-            dicesController.EnableAnimationRotate();
-        }*/
-
         if (other.gameObject.GetComponent<LightSpell>())
             StartCoroutine(ActivateAltarLightSpellRoutine(other.gameObject.GetComponent<LightSpell>()));
-        
-
     }
 
     private IEnumerator ActivateAltarLightSpellRoutine(LightSpell spell)

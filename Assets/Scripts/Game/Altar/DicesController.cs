@@ -5,7 +5,6 @@ public class DicesController : MonoBehaviour
 {
     [SerializeField] private List<Dice10> dicesAnimation;
 
-
    
     public void ActivateDices()
     {

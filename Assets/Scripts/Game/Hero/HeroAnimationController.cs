@@ -59,7 +59,7 @@ public class HeroAnimationController : MonoBehaviour
 
     private void AnimationMove()
     {
-        animationBlend = Mathf.Lerp(animationBlend, hero.TargetSpeed, Time.deltaTime * hero.speedChangeRate);
+        animationBlend = Mathf.Lerp(animationBlend, hero.TargetSpeed, Time.deltaTime * hero.SpeedChangeRate);
         if (animationBlend < 0.01f) animationBlend = 0f;
 
         animator.SetFloat(animIDSpeed, animationBlend);
@@ -72,18 +72,17 @@ public class HeroAnimationController : MonoBehaviour
 
         if (!hero.Move.Grounded) return;
 
-        bool jump = hero.Move.jump && hero.Move._jumpTimeoutDelta <= 0.0f;
+        bool jump = hero.Move.Jump && hero.Move.JumpTimeoutDelta <= 0.0f;
         animator.SetBool(animIDJump, jump);
 
         animator.SetBool(animIDFreeFall, false);
-
     }
 
     private void AnimationFall()
     {
         if (hero.Move.Grounded) return;
 
-        if (hero.Move._fallTimeoutDelta < 0.0f)
+        if (hero.Move.FallTimeoutDelta < 0.0f)
             animator.SetBool(animIDFreeFall, true);
     }
 

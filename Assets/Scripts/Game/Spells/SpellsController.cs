@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpellsController : MonoBehaviour
@@ -20,14 +19,12 @@ public class SpellsController : MonoBehaviour
     private void OnDisable()
     {
         hero.OnSpellActivate -= LightSpell;
-
     }
 
     private void LightSpell()
     {
         StartCoroutine(LightSpellRoutine());
     }
-
 
     private IEnumerator LightSpellRoutine()
     {

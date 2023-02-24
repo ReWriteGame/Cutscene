@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using Tools.Animations;
 using UnityEngine;
@@ -35,6 +34,7 @@ public class Dice10Visual : MonoBehaviour
         dice10.OnActivate -= loopBounceAnimation.Play;
         dice10.OnActivate -= particle.Play;
     }
+
     private void Initialize()
     {
         foreach (var symbol in symbols)
@@ -71,7 +71,6 @@ public class Dice10Visual : MonoBehaviour
         color.a = Mathf.Clamp(value, 0, 1);
         text.color = color;
     }
-
 
     private IEnumerator ChangeOpacitySymbolsRoutine(float opacity, float timeDuration)
     {
